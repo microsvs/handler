@@ -9,7 +9,7 @@ package main
 
 import (
 	"net/http"
-	"github.com/1046102779/handler"
+	"github.com/microsvs/handler"
 )
 
 func main() {
@@ -34,6 +34,10 @@ h := handler.New(&handler.Config{
 	GraphiQL: false,
 	Playground: true,
 })
+
+在config中新增错误返回处理的自定义
+type HandlerErrorRespFn func([]gqlerrors.FormattedError) interface{}
+并在 type Config类型中新增了HandlerErrorRespFn元素, 这样就可以在错误返回过程中，对原生错误进行自定义处理
 ```
 
 ### Details
@@ -78,5 +82,5 @@ depending on the provided `Content-Type` header.
 
 ### Test
 ```bash
-$ go get github.com/1046102779/handler
+$ go get github.com/microsvs/handler
 $ go build && go test ./...
